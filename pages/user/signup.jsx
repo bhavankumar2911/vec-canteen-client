@@ -48,16 +48,17 @@ function signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log({ ...formData });
     try {
-      const response = await Axios.post(
+      const { data } = await Axios.post(
         `${process.env.NEXT_PUBLIC_API_HOST}/user`,
         { ...formData }
       );
-    } catch (error) {
-      console.log(error);
-    }
 
-    console.log(formData);
+      alert(data.message);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
   };
 
   return (
@@ -94,6 +95,7 @@ function signup() {
             value={formData.department}
             onChange={handleDataChange}
           >
+            <option value="">Select</option>
             <option value="Automobile Engineering">
               Automobile Engineering
             </option>
