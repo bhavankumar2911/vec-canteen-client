@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import MenuTable from "../components/admin/MenuTable";
-import MenuAddForm from "../components/admin/MenuAddForm";
-import MenuEditForm from "../components/admin/MenuEditForm";
+import MenuTable from "../../components/admin/MenuTable";
+import MenuAddForm from "../../components/admin/MenuAddForm";
+import MenuEditForm from "../../components/admin/MenuEditForm";
 
 function menu() {
   const [menu, setMenu] = useState([]);

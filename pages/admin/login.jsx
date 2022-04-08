@@ -1,5 +1,5 @@
 import React from "react";
-import SignupLoginForm from "../components/admin/SignupLoginForm";
+import SignupLoginForm from "../../components/admin/SignupLoginForm";
 
 function signup() {
   return (
@@ -7,7 +7,7 @@ function signup() {
       <SignupLoginForm
         formType="login"
         submissionRoute="/admin/login"
-        redirect="/dashboard"
+        redirect="/admin/dashboard"
       />
     </div>
   );

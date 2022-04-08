@@ -92,7 +92,7 @@ function SignupLoginForm({ formType, submissionRoute, redirect }) {
           </button>
           <p className="text-primary font-semibold text-center mt-3 text-sm">
             {formType == "login" ? "New user? " : "Already have an account? "}
-            <Link href={formType == "login" ? "/signup" : "/login"}>
+            <Link href={formType == "login" ? "/admin/signup" : "/admin/login"}>
               <a>
                 <u>{formType == "login" ? "Sign Up" : "Login"}</u>
               </a>
