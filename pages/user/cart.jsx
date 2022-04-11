@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGlobalContext } from "../../context/global";
 import Axios from "axios";
 
 function cart() {
+  let orderId = "";
+
   const {
     cart,
     handleQuantityIncrement,
@@ -11,15 +13,81 @@ function cart() {
     loadCartFromStorage,
   } = useGlobalContext();
 
-  const handleConfirmOrder = async () => {
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  useEffect(() => {
+    loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  });
+
+  // Step 3 in payment
+  const saveOrderDetails = async (response) => {
     try {
       const { data } = await Axios.post(
         `${process.env.NEXT_PUBLIC_API_HOST}/order`,
+        {
+          cart: loadCartFromStorage(),
+          razorpayOrderId: orderId,
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpaySignature: response.razorpay_signature,
+        },
+        { withCredentials: true }
+      );
+
+      orderId = "";
+      console.log(data);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
+
+  // Step 2 in payment
+  const proceedPayment = (orderData) => {
+    const options = {
+      key: process.env.NEXT_PUBLIC_RP_TEST_KEY_ID,
+      currency: orderData.currency,
+      amount: orderData.amount,
+      name: "Vec Canteen",
+      description: "You are paying to VEC canteen to place your order",
+      image: `/admin/vec-logo.png`,
+      order_id: orderData.orderId,
+      handler: saveOrderDetails,
+      prefill: {
+        name: "Anirudh Jwala",
+        email: "anirudh@gmail.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#ffffff",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
+
+  // Step 1 in payment
+  const createRPOrder = async () => {
+    try {
+      const { data } = await Axios.post(
+        `${process.env.NEXT_PUBLIC_API_HOST}/payment/order`,
         { cart: loadCartFromStorage() },
         { withCredentials: true }
       );
 
-      console.log(data);
+      orderId = data.orderId;
+      proceedPayment(data);
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -58,8 +126,8 @@ function cart() {
       <p>
         Total <span>{cartTotal()}</span>
       </p>
-      <button className="border border-primary" onClick={handleConfirmOrder}>
-        Confirm Order
+      <button className="border border-primary" onClick={createRPOrder}>
+        Proceed to pay
       </button>
     </menu>
   );

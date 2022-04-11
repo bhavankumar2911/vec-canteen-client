@@ -18,7 +18,7 @@ function dashboard() {
           style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }}
         >
           <li className="bg-primary text-white py-3 px-4 rounded-full mb-4 w-3/4 text-center">
-            <Link href="#">
+            <Link href="/admin/orders">
               <a>Manage orders</a>
             </Link>
           </li>
