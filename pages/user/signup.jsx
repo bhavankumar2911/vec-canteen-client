@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import Button from "../../components/common/Button";
+import { useRouter } from "next/router";
 
-const inputClasses = "border border-primary";
+const inputClasses =
+  "border border-gray-300 rounded-lg p-2 w-full outline-primary";
+const inputGroupClasses = "mb-3";
+const labelClasses = "mb-1 inline-block";
 
 function signup() {
   const [formData, setFormData] = useState({
@@ -13,6 +18,7 @@ function signup() {
     password1: "",
     password2: "",
   });
+  const router = useRouter();
 
   const handleDataChange = (e) => {
     const field = e.target.name;
@@ -55,17 +61,22 @@ function signup() {
         { ...formData }
       );
 
-      alert(data.message);
+      router.push("/user/login");
     } catch (error) {
       alert(error.response.data.message);
     }
   };
 
   return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
+    <main className="pb-5">
+      <h1 className="text-center text-3xl text-primary font-bold py-5">
+        Sign Up
+      </h1>
+      <form onSubmit={handleSubmit} className="p-3 w-11/12 mx-auto">
+        <div className={inputGroupClasses}>
+          <label htmlFor="name" className={labelClasses}>
+            Name
+          </label>
           <br />
           <input
             type="text"
@@ -75,8 +86,10 @@ function signup() {
             onChange={handleDataChange}
           />
         </div>
-        <div>
-          <label htmlFor="registerNumber">Exam register number</label>
+        <div className={inputGroupClasses}>
+          <label htmlFor="registerNumber" className={labelClasses}>
+            Exam register number
+          </label>
           <br />
           <input
             type="number"
@@ -86,8 +99,10 @@ function signup() {
             onChange={handleDataChange}
           />
         </div>
-        <div>
-          <label htmlFor="department">Department</label>
+        <div className={inputGroupClasses}>
+          <label htmlFor="department" className={labelClasses}>
+            Department
+          </label>
           <br />
           <select
             name="department"
@@ -126,8 +141,10 @@ function signup() {
             </option>
           </select>
         </div>
-        <div>
-          <label htmlFor="graduationYear">Year of graduation</label>
+        <div className={inputGroupClasses}>
+          <label htmlFor="graduationYear" className={labelClasses}>
+            Year of graduation
+          </label>
           <br />
           <input
             type="number"
@@ -137,8 +154,10 @@ function signup() {
             onChange={handleDataChange}
           />
         </div>
-        <div>
-          <label htmlFor="username">Username</label>
+        <div className={inputGroupClasses}>
+          <label htmlFor="username" className={labelClasses}>
+            Username
+          </label>
           <br />
           <input
             type="text"
@@ -148,8 +167,10 @@ function signup() {
             onChange={handleDataChange}
           />
         </div>
-        <div>
-          <label htmlFor="password1">Password</label>
+        <div className={inputGroupClasses}>
+          <label htmlFor="password1" className={labelClasses}>
+            Password
+          </label>
           <br />
           <input
             type="password"
@@ -159,8 +180,10 @@ function signup() {
             onChange={handleDataChange}
           />
         </div>
-        <div>
-          <label htmlFor="password2">Confirm password</label>
+        <div className={inputGroupClasses}>
+          <label htmlFor="password2" className={labelClasses}>
+            Confirm password
+          </label>
           <br />
           <input
             type="password"
@@ -170,7 +193,9 @@ function signup() {
             onChange={handleDataChange}
           />
         </div>
-        <button type="submit">Create Account</button>
+        <span className="pt-3 block">
+          <Button type="submit" text="Create Account" />
+        </span>
       </form>
     </main>
   );

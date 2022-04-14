@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
-import QRCode from "qrcode.react";
+import useOrderFormatter from "../../hooks/common/useOrderFormatter";
 
 function orders() {
   const [orders, setOrders] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
 
+  const formattedOrders = useOrderFormatter(orders, orderDetails);
+
   const fetchOrders = async () => {
     try {
       const { data } = await Axios.get(
-        `${process.env.NEXT_PUBLIC_API_HOST}/order`,
+        `${process.env.NEXT_PUBLIC_API_HOST}/order/own`,
         { withCredentials: true }
       );
 
-      console.log(data);
       setOrders([...data.orders]);
       setOrderDetails([...data.orderDetails]);
     } catch (error) {
@@ -22,47 +23,19 @@ function orders() {
   };
   useEffect(fetchOrders, []);
 
-  const displayOrders = () => {
-    let formattedOrders = [];
-
-    // formatting the orders data for displaying
-    orders.forEach((order) => {
-      let itemsForEachOrder = [];
-
-      orderDetails.forEach((orderDetail) => {
-        if (order.id == orderDetail.orderId)
-          itemsForEachOrder.push(orderDetail);
-      });
-
-      formattedOrders.push({ id: order.id, items: [...itemsForEachOrder] });
-    });
-
-    // injecting the data into HTML template
-    formattedOrders = formattedOrders.map((orderItem, index) => {
-      let foodItemsWithQuantity = "";
-
-      orderItem.items.forEach(
-        (item) =>
-          (foodItemsWithQuantity += `, ${item.quantity} ${item.foodName}`)
-      );
-
-      return (
-        <li key={index}>
-          <h3>Order Id: {orderItem.id}</h3>
-          <QRCode value={orderItem.id} size={50} />
-          <p>{foodItemsWithQuantity.substring(2)}</p>
-          <p>Status: {orderItem.isClosed ? "Closed" : "Not closed"}</p>
-        </li>
-      );
-    });
-
-    return [...formattedOrders];
-  };
-
   return (
     <div>
-      <h1>My Orders</h1>
-      <ul>{displayOrders()}</ul>
+      <section>
+        {formattedOrders.map((order, index) => (
+          <li key={index}>
+            <p>
+              <small>Order Id: {order.id}</small>
+            </p>
+            <p>{order.items}</p>
+            <p>Status: {order.isClosed ? "Closed" : "Pending"}</p>
+          </li>
+        ))}
+      </section>
     </div>
   );
 }

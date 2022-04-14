@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useGlobalContext } from "../../context/global";
 import Axios from "axios";
+import { useRouter } from "next/router";
 
 function cart() {
+  const router = useRouter();
   let orderId = "";
 
   const {
@@ -46,7 +48,7 @@ function cart() {
       );
 
       orderId = "";
-      console.log(data);
+      router.push("/user/orders");
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -63,11 +65,11 @@ function cart() {
       image: `/admin/vec-logo.png`,
       order_id: orderData.orderId,
       handler: saveOrderDetails,
-      prefill: {
-        name: "Anirudh Jwala",
-        email: "anirudh@gmail.com",
-        contact: "9999999999",
-      },
+      // prefill: {
+      //   name: "Anirudh Jwala",
+      //   email: "anirudh@gmail.com",
+      //   contact: "9999999999",
+      // },
       theme: {
         color: "#ffffff",
       },

@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import Button from "../../components/common/Button";
+import { useRouter } from "next/router";
 
-const inputClasses = "border border-primary";
+const inputClasses =
+  "border border-gray-300 rounded-lg p-2 w-full outline-primary";
+const inputGroupClasses = "mb-3";
+const labelClasses = "mb-1 inline-block";
 
 function login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const router = useRouter();
 
   const handleDataForm = (e) => {
     const field = e.target.name;
@@ -24,17 +30,22 @@ function login() {
         { withCredentials: true }
       );
 
-      alert(data.message);
+      router.push("/user/profile");
     } catch (error) {
       alert(error.response.data.message);
     }
   };
 
   return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
+    <main className="pb-5">
+      <h1 className="text-center text-3xl text-primary font-bold py-5">
+        Login
+      </h1>
+      <form onSubmit={handleSubmit} className="p-3 w-11/12 mx-auto">
+        <div className={inputGroupClasses}>
+          <label htmlFor="username" className={labelClasses}>
+            Username
+          </label>
           <br />
           <input
             type="text"
@@ -44,8 +55,10 @@ function login() {
             className={inputClasses}
           />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className={inputGroupClasses}>
+          <label htmlFor="password" className={labelClasses}>
+            Password
+          </label>
           <br />
           <input
             type="password"
@@ -55,7 +68,9 @@ function login() {
             className={inputClasses}
           />
         </div>
-        <button type="submit">Login</button>
+        <span className="pt-3 block">
+          <Button type="submit" text="Login" />
+        </span>
       </form>
     </main>
   );
