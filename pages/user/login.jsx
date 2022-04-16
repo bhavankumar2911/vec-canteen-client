@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Axios from "axios";
 import Button from "../../components/common/Button";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import LeftArrow from "../../components/icons/LeftArrow";
 
 const inputClasses =
   "border border-gray-300 rounded-lg p-2 w-full outline-primary";
@@ -37,41 +39,51 @@ function login() {
   };
 
   return (
-    <main className="pb-5">
-      <h1 className="text-center text-3xl text-primary font-bold py-5">
-        Login
-      </h1>
-      <form onSubmit={handleSubmit} className="p-3 w-11/12 mx-auto">
-        <div className={inputGroupClasses}>
-          <label htmlFor="username" className={labelClasses}>
-            Username
-          </label>
-          <br />
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleDataForm}
-            className={inputClasses}
-          />
+    <main className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between min-h-screen">
+        <div>
+          <h1 className="text-center text-3xl text-primary font-bold py-5">
+            Login
+          </h1>
+          <form onSubmit={handleSubmit} className="p-3 w-11/12 mx-auto">
+            <div className={inputGroupClasses}>
+              <label htmlFor="username" className={labelClasses}>
+                Username
+              </label>
+              <br />
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleDataForm}
+                className={inputClasses}
+              />
+            </div>
+            <div className={inputGroupClasses}>
+              <label htmlFor="password" className={labelClasses}>
+                Password
+              </label>
+              <br />
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleDataForm}
+                className={inputClasses}
+              />
+            </div>
+            <span className="pt-3 block">
+              <Button type="submit" text="Login" />
+            </span>
+          </form>
         </div>
-        <div className={inputGroupClasses}>
-          <label htmlFor="password" className={labelClasses}>
-            Password
-          </label>
-          <br />
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleDataForm}
-            className={inputClasses}
-          />
-        </div>
-        <span className="pt-3 block">
-          <Button type="submit" text="Login" />
-        </span>
-      </form>
+        <Link href="/">
+          <a className="flex mx-auto my-10">
+            <LeftArrow />
+            <span className="inline-block ml-3">HOME</span>
+          </a>
+        </Link>
+      </div>
     </main>
   );
 }

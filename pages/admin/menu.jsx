@@ -7,7 +7,19 @@ import MenuEditForm from "../../components/admin/MenuEditForm";
 function menu() {
   const [menu, setMenu] = useState([]);
   const [idOfFoodBeingEdited, setIdOfFoodBeingEdited] = useState(null);
+  const [nameOfFoodBeingEdited, setNameOfFoodBeingEdited] = useState("");
+  const [priceOfFoodBeingEdited, setPriceOfFoodBeingEdited] = useState("");
+  const [isAvailableOfFoodBeingEdited, setIsAvailableOfFoodBeingEdited] =
+    useState(true);
   const [showEditForm, setShowEditForm] = useState(false);
+
+  console.log(
+    "from menu page",
+    idOfFoodBeingEdited,
+    nameOfFoodBeingEdited,
+    priceOfFoodBeingEdited,
+    isAvailableOfFoodBeingEdited
+  );
 
   const fetchMenu = async () => {
     try {
@@ -24,6 +36,7 @@ function menu() {
     }
   };
   useEffect(fetchMenu, []);
+
   return (
     <div className="pb-10">
       <div className="w-11/12 mx-auto">
@@ -50,6 +63,10 @@ function menu() {
               menu={menu}
               setMenu={setMenu}
               idOfFoodBeingEdited={idOfFoodBeingEdited}
+              nameOfFoodBeingEdited={nameOfFoodBeingEdited}
+              priceOfFoodBeingEdited={priceOfFoodBeingEdited}
+              isAvailableOfFoodBeingEdited={isAvailableOfFoodBeingEdited}
+              setShowEditForm={setShowEditForm}
             />
           </section>
         )}
@@ -61,6 +78,9 @@ function menu() {
           menu={menu}
           setMenu={setMenu}
           setIdOfFoodBeingEdited={setIdOfFoodBeingEdited}
+          setNameOfFoodBeingEdited={setNameOfFoodBeingEdited}
+          setPriceOfFoodBeingEdited={setPriceOfFoodBeingEdited}
+          setIsAvailableOfFoodBeingEdited={setIsAvailableOfFoodBeingEdited}
           setShowEditForm={setShowEditForm}
         />
       </div>

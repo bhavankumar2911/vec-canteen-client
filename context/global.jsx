@@ -35,6 +35,11 @@ function GlobalProvider({ children }) {
     saveCartToStorage(newCart);
   };
 
+  const resetCart = () => {
+    setCart([]);
+    saveCartToStorage([]);
+  };
+
   const handleQuantityIncrement = (id) => {
     const newCart = [
       ...cart.map((cartItem) => {
@@ -100,6 +105,7 @@ function GlobalProvider({ children }) {
         cartTotal,
         cartCount,
         loadCartFromStorage,
+        resetCart,
       }}
     >
       {children}

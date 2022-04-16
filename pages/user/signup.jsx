@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import Button from "../../components/common/Button";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import LeftArrow from "../../components/icons/LeftArrow";
 
 const inputClasses =
   "border border-gray-300 rounded-lg p-2 w-full outline-primary";
@@ -68,135 +70,145 @@ function signup() {
   };
 
   return (
-    <main className="pb-5">
-      <h1 className="text-center text-3xl text-primary font-bold py-5">
-        Sign Up
-      </h1>
-      <form onSubmit={handleSubmit} className="p-3 w-11/12 mx-auto">
-        <div className={inputGroupClasses}>
-          <label htmlFor="name" className={labelClasses}>
-            Name
-          </label>
-          <br />
-          <input
-            type="text"
-            name="name"
-            className={inputClasses}
-            value={formData.name}
-            onChange={handleDataChange}
-          />
+    <main>
+      <div className="flex flex-col justify-between min-h-screen">
+        <div>
+          <h1 className="text-center text-3xl text-primary font-bold py-5">
+            Sign Up
+          </h1>
+          <form onSubmit={handleSubmit} className="p-3 w-11/12 mx-auto">
+            <div className={inputGroupClasses}>
+              <label htmlFor="name" className={labelClasses}>
+                Name
+              </label>
+              <br />
+              <input
+                type="text"
+                name="name"
+                className={inputClasses}
+                value={formData.name}
+                onChange={handleDataChange}
+              />
+            </div>
+            <div className={inputGroupClasses}>
+              <label htmlFor="registerNumber" className={labelClasses}>
+                Exam register number
+              </label>
+              <br />
+              <input
+                type="number"
+                name="registerNumber"
+                className={inputClasses}
+                value={formData.registerNumber}
+                onChange={handleDataChange}
+              />
+            </div>
+            <div className={inputGroupClasses}>
+              <label htmlFor="department" className={labelClasses}>
+                Department
+              </label>
+              <br />
+              <select
+                name="department"
+                className={inputClasses}
+                value={formData.department}
+                onChange={handleDataChange}
+              >
+                <option value="">Select</option>
+                <option value="Automobile Engineering">
+                  Automobile Engineering
+                </option>
+                <option value="Artificial Intelligence and Data Science">
+                  Artificial Intelligence and Data Science
+                </option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Computer Science and Engineering">
+                  Computer Science and Engineering
+                </option>
+                <option value="Electrical and Electronics Engineering">
+                  Electrical and Electronics Engineering
+                </option>
+                <option value="Electronics and Communication Engineering">
+                  Electronics and Communication Engineering
+                </option>
+                <option value="Electronics and Instrumentation Engineering">
+                  Electronics and Instrumentation Engineering
+                </option>
+                <option value="Information Technology">
+                  Information Technology
+                </option>
+                <option value="Mechanical Engineering">
+                  Mechanical Engineering
+                </option>
+                <option value="Master of Business Administration">
+                  Master of Business Administration
+                </option>
+              </select>
+            </div>
+            <div className={inputGroupClasses}>
+              <label htmlFor="graduationYear" className={labelClasses}>
+                Year of graduation
+              </label>
+              <br />
+              <input
+                type="number"
+                name="graduationYear"
+                className={inputClasses}
+                value={formData.graduationYear}
+                onChange={handleDataChange}
+              />
+            </div>
+            <div className={inputGroupClasses}>
+              <label htmlFor="username" className={labelClasses}>
+                Username
+              </label>
+              <br />
+              <input
+                type="text"
+                name="username"
+                className={inputClasses}
+                value={formData.username}
+                onChange={handleDataChange}
+              />
+            </div>
+            <div className={inputGroupClasses}>
+              <label htmlFor="password1" className={labelClasses}>
+                Password
+              </label>
+              <br />
+              <input
+                type="password"
+                name="password1"
+                className={inputClasses}
+                value={formData.password1}
+                onChange={handleDataChange}
+              />
+            </div>
+            <div className={inputGroupClasses}>
+              <label htmlFor="password2" className={labelClasses}>
+                Confirm password
+              </label>
+              <br />
+              <input
+                type="password"
+                name="password2"
+                className={inputClasses}
+                value={formData.password2}
+                onChange={handleDataChange}
+              />
+            </div>
+            <span className="pt-3 block">
+              <Button type="submit" text="Create Account" />
+            </span>
+          </form>
         </div>
-        <div className={inputGroupClasses}>
-          <label htmlFor="registerNumber" className={labelClasses}>
-            Exam register number
-          </label>
-          <br />
-          <input
-            type="number"
-            name="registerNumber"
-            className={inputClasses}
-            value={formData.registerNumber}
-            onChange={handleDataChange}
-          />
-        </div>
-        <div className={inputGroupClasses}>
-          <label htmlFor="department" className={labelClasses}>
-            Department
-          </label>
-          <br />
-          <select
-            name="department"
-            className={inputClasses}
-            value={formData.department}
-            onChange={handleDataChange}
-          >
-            <option value="">Select</option>
-            <option value="Automobile Engineering">
-              Automobile Engineering
-            </option>
-            <option value="Artificial Intelligence and Data Science">
-              Artificial Intelligence and Data Science
-            </option>
-            <option value="Civil Engineering">Civil Engineering</option>
-            <option value="Computer Science and Engineering">
-              Computer Science and Engineering
-            </option>
-            <option value="Electrical and Electronics Engineering">
-              Electrical and Electronics Engineering
-            </option>
-            <option value="Electronics and Communication Engineering">
-              Electronics and Communication Engineering
-            </option>
-            <option value="Electronics and Instrumentation Engineering">
-              Electronics and Instrumentation Engineering
-            </option>
-            <option value="Information Technology">
-              Information Technology
-            </option>
-            <option value="Mechanical Engineering">
-              Mechanical Engineering
-            </option>
-            <option value="Master of Business Administration">
-              Master of Business Administration
-            </option>
-          </select>
-        </div>
-        <div className={inputGroupClasses}>
-          <label htmlFor="graduationYear" className={labelClasses}>
-            Year of graduation
-          </label>
-          <br />
-          <input
-            type="number"
-            name="graduationYear"
-            className={inputClasses}
-            value={formData.graduationYear}
-            onChange={handleDataChange}
-          />
-        </div>
-        <div className={inputGroupClasses}>
-          <label htmlFor="username" className={labelClasses}>
-            Username
-          </label>
-          <br />
-          <input
-            type="text"
-            name="username"
-            className={inputClasses}
-            value={formData.username}
-            onChange={handleDataChange}
-          />
-        </div>
-        <div className={inputGroupClasses}>
-          <label htmlFor="password1" className={labelClasses}>
-            Password
-          </label>
-          <br />
-          <input
-            type="password"
-            name="password1"
-            className={inputClasses}
-            value={formData.password1}
-            onChange={handleDataChange}
-          />
-        </div>
-        <div className={inputGroupClasses}>
-          <label htmlFor="password2" className={labelClasses}>
-            Confirm password
-          </label>
-          <br />
-          <input
-            type="password"
-            name="password2"
-            className={inputClasses}
-            value={formData.password2}
-            onChange={handleDataChange}
-          />
-        </div>
-        <span className="pt-3 block">
-          <Button type="submit" text="Create Account" />
-        </span>
-      </form>
+        <Link href="/">
+          <a className="flex mx-auto my-10">
+            <LeftArrow />
+            <span className="inline-block ml-3">HOME</span>
+          </a>
+        </Link>
+      </div>
     </main>
   );
 }

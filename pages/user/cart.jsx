@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { useGlobalContext } from "../../context/global";
 import Axios from "axios";
 import { useRouter } from "next/router";
+import Header from "../../components/common/Header";
+import Wrapper from "../../components/common/Wrapper";
+import Button from "../../components/common/Button";
 
 function cart() {
   const router = useRouter();
@@ -48,7 +51,7 @@ function cart() {
       );
 
       orderId = "";
-      router.push("/user/orders");
+      router.push("/user/profile");
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -62,7 +65,7 @@ function cart() {
       amount: orderData.amount,
       name: "Vec Canteen",
       description: "You are paying to VEC canteen to place your order",
-      image: `/admin/vec-logo.png`,
+      image: `/vec-logo-small.png`,
       order_id: orderData.orderId,
       handler: saveOrderDetails,
       // prefill: {
@@ -71,7 +74,7 @@ function cart() {
       //   contact: "9999999999",
       // },
       theme: {
-        color: "#ffffff",
+        color: "#642611",
       },
     };
 
@@ -96,42 +99,57 @@ function cart() {
   };
 
   return (
-    <menu>
-      <h1>My bag</h1>
-      <ul>
-        {cart.map((cartItem, index) => (
-          <li key={index}>
-            <p>{cartItem.foodName}</p>
-            <span>
-              <button
-                data-food-id={cartItem.id}
-                onClick={(e) =>
-                  handleQuantityDecrement(parseInt(e.target.dataset.foodId))
-                }
-              >
-                -
-              </button>
-              <p>{cartItem.quantity}</p>
-              <button
-                data-food-id={cartItem.id}
-                onClick={(e) =>
-                  handleQuantityIncrement(parseInt(e.target.dataset.foodId))
-                }
-              >
-                +
-              </button>
-            </span>
-            <p>{cartItem.amount}</p>
-          </li>
-        ))}
-      </ul>
-      <p>
-        Total <span>{cartTotal()}</span>
-      </p>
-      <button className="border border-primary" onClick={createRPOrder}>
-        Proceed to pay
-      </button>
-    </menu>
+    <main className="pt-[12vh] bg-gray-50 min-h-screen">
+      <Wrapper>
+        <Header />
+        <h1 className="text-2xl font-semibold my-5 text-center">My Cart</h1>
+        <ul>
+          {cart.map((cartItem, index) => (
+            <li
+              key={index}
+              className="bg-white rounded-xl drop-shadow-md mb-3 flex items-center justify-between overflow-hidden p-2"
+            >
+              <div>
+                <p className="font-semibold">{cartItem.foodName}</p>
+                <p>
+                  Rs. {new Intl.NumberFormat("en-IN").format(cartItem.amount)}
+                </p>
+              </div>
+              <div className="flex min-w-[50px] justify-between border rounded-xl overflow-hidden">
+                <button
+                  data-food-id={cartItem.id}
+                  onClick={(e) =>
+                    handleQuantityDecrement(parseInt(e.target.dataset.foodId))
+                  }
+                  className="border-r p-1 w-[25px] text-center inline-block cursor-pointer hover:bg-red-500 hover:text-white"
+                >
+                  -
+                </button>
+                <p className="border-r p-1 w-[25px] text-center inline-block">
+                  {cartItem.quantity}
+                </p>
+                <button
+                  data-food-id={cartItem.id}
+                  onClick={(e) =>
+                    handleQuantityIncrement(parseInt(e.target.dataset.foodId))
+                  }
+                  className=" p-1 w-[25px] text-center inline-block cursor-pointer hover:bg-green-500 hover:text-white"
+                >
+                  +
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p className="text-center my-5 text-lg font-semibold">
+          Total{" "}
+          <span>Rs. {new Intl.NumberFormat("en-IN").format(cartTotal())}</span>
+        </p>
+        <span onClick={createRPOrder}>
+          <Button type="button" text="Proceed to pay" />
+        </span>
+      </Wrapper>
+    </main>
   );
 }
 
