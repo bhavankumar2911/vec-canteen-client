@@ -9,6 +9,7 @@ import Loader from "../../components/common/Loader";
 import { useRouter } from "next/router";
 import UserAuthorizationScreen from "../../components/common/UserAuthorizationScreen";
 import { useGlobalContext } from "../../context/global";
+import { QRCodeSVG } from "qrcode.react";
 
 function profile() {
   // useForbiddenRedirect();
@@ -69,7 +70,7 @@ function profile() {
   };
 
   return (
-    <main className="bg-gray-50 min-h-screen pt-[12vh]">
+    <main className="bg-gray-50 min-h-screen py-[12vh]">
       <UserAuthorizationScreen />
       <Header />
       <Wrapper>
@@ -84,13 +85,11 @@ function profile() {
                 formattedOrders.map((order, index) => (
                   <li
                     key={index}
-                    className="bg-white rounded-xl p-3 mb-3 drop-shadow-md"
+                    className="bg-white rounded-xl p-3 mb-3 drop-shadow-md text-center"
                   >
-                    <p>
-                      <small className="text-gray-400">
-                        Order Id: {order.id}
-                      </small>
-                    </p>
+                    <span className="flex justify-center py-3">
+                      <QRCodeSVG value={order.id} />
+                    </span>
                     <p>{order.items}</p>
                     <p>
                       {order.isClosed ? (
@@ -110,14 +109,14 @@ function profile() {
                   {loadingOrders ? (
                     ""
                   ) : (
-                    <div className="bg-white rounded-lg p-3">
+                    <div className="bg-white rounded-lg p-5 drop-shadow-md">
                       <p className="text-center">You have no orders!</p>
                       <Link href="/">
                         <a>
                           <Button
                             type="button"
                             text="Search Food"
-                            classes="w-1/2 mx-auto my-5"
+                            classes="mx-auto mt-3"
                           />
                         </a>
                       </Link>

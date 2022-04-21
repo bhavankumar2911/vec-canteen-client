@@ -28,9 +28,6 @@ function orders() {
       <section>
         {formattedOrders.map((order, index) => (
           <li key={index}>
-            <p>
-              <small>Order Id: {order.id}</small>
-            </p>
             <p>{order.items}</p>
             <p>Status: {order.isClosed ? "Closed" : "Pending"}</p>
           </li>

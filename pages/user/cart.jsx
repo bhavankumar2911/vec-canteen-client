@@ -5,9 +5,11 @@ import { useRouter } from "next/router";
 import Header from "../../components/common/Header";
 import Wrapper from "../../components/common/Wrapper";
 import Button from "../../components/common/Button";
+import Link from "next/link";
 
 function cart() {
   const router = useRouter();
+  const { resetCart, cartCount } = useGlobalContext();
   let orderId = "";
 
   const {
@@ -52,6 +54,7 @@ function cart() {
 
       orderId = "";
       router.push("/user/profile");
+      resetCart();
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -102,52 +105,72 @@ function cart() {
     <main className="pt-[12vh] bg-gray-50 min-h-screen">
       <Wrapper>
         <Header />
-        <h1 className="text-2xl font-semibold my-5 text-center">My Cart</h1>
-        <ul>
-          {cart.map((cartItem, index) => (
-            <li
-              key={index}
-              className="bg-white rounded-xl drop-shadow-md mb-3 flex items-center justify-between overflow-hidden p-2"
-            >
-              <div>
-                <p className="font-semibold">{cartItem.foodName}</p>
-                <p>
-                  Rs. {new Intl.NumberFormat("en-IN").format(cartItem.amount)}
-                </p>
-              </div>
-              <div className="flex min-w-[50px] justify-between border rounded-xl overflow-hidden">
-                <button
-                  data-food-id={cartItem.id}
-                  onClick={(e) =>
-                    handleQuantityDecrement(parseInt(e.target.dataset.foodId))
-                  }
-                  className="border-r p-1 w-[25px] text-center inline-block cursor-pointer hover:bg-red-500 hover:text-white"
+        {cartCount() > 0 ? (
+          <>
+            <h1 className="text-2xl font-semibold my-5 text-center">My Cart</h1>
+            <ul>
+              {cart.map((cartItem, index) => (
+                <li
+                  key={index}
+                  className="bg-white rounded-xl drop-shadow-md mb-3 flex items-center justify-between overflow-hidden p-2"
                 >
-                  -
-                </button>
-                <p className="border-r p-1 w-[25px] text-center inline-block">
-                  {cartItem.quantity}
-                </p>
-                <button
-                  data-food-id={cartItem.id}
-                  onClick={(e) =>
-                    handleQuantityIncrement(parseInt(e.target.dataset.foodId))
-                  }
-                  className=" p-1 w-[25px] text-center inline-block cursor-pointer hover:bg-green-500 hover:text-white"
-                >
-                  +
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <p className="text-center my-5 text-lg font-semibold">
-          Total{" "}
-          <span>Rs. {new Intl.NumberFormat("en-IN").format(cartTotal())}</span>
-        </p>
-        <span onClick={createRPOrder}>
-          <Button type="button" text="Proceed to pay" />
-        </span>
+                  <div>
+                    <p className="font-semibold">{cartItem.foodName}</p>
+                    <p>
+                      Rs.{" "}
+                      {new Intl.NumberFormat("en-IN").format(cartItem.amount)}
+                    </p>
+                  </div>
+                  <div className="flex min-w-[50px] justify-between border rounded-xl overflow-hidden">
+                    <button
+                      data-food-id={cartItem.id}
+                      onClick={(e) =>
+                        handleQuantityDecrement(
+                          parseInt(e.target.dataset.foodId)
+                        )
+                      }
+                      className="border-r p-1 w-[25px] text-center inline-block cursor-pointer hover:bg-red-500 hover:text-white"
+                    >
+                      -
+                    </button>
+                    <p className="border-r p-1 w-[25px] text-center inline-block">
+                      {cartItem.quantity}
+                    </p>
+                    <button
+                      data-food-id={cartItem.id}
+                      onClick={(e) =>
+                        handleQuantityIncrement(
+                          parseInt(e.target.dataset.foodId)
+                        )
+                      }
+                      className=" p-1 w-[25px] text-center inline-block cursor-pointer hover:bg-green-500 hover:text-white"
+                    >
+                      +
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="text-center my-5 text-lg font-semibold">
+              Total{" "}
+              <span>
+                Rs. {new Intl.NumberFormat("en-IN").format(cartTotal())}
+              </span>
+            </p>
+            <span onClick={createRPOrder}>
+              <Button type="button" text="Proceed to pay" />
+            </span>
+          </>
+        ) : (
+          <div className="text-center absolute top-1/2 left-0 right-0 px-5 -translate-y-1/2">
+            <h2 className="my-5">Your cart is empty!</h2>
+            <Link href="/">
+              <a>
+                <Button type="button" text="Search for food" />
+              </a>
+            </Link>
+          </div>
+        )}
       </Wrapper>
     </main>
   );
