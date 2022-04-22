@@ -8,7 +8,7 @@ import Footer from "../components/common/Footer";
 
 function index() {
   const [menu, setMenu] = useState([]);
-  const { addToCart } = useGlobalContext();
+  const { addToCart, isPresentInCart, deleteFromCart } = useGlobalContext();
 
   const fetchMenu = async () => {
     try {
@@ -23,6 +23,16 @@ function index() {
     }
   };
   useEffect(fetchMenu, []);
+
+  const addOrRemoveFromCart = (item) => {
+    const { id } = item;
+    if (isPresentInCart(id)) {
+      deleteFromCart(id);
+      return;
+    }
+
+    addToCart(item);
+  };
 
   return (
     <main className="pt-[12vh] bg-gray-50 min-h-screen">
@@ -62,14 +72,22 @@ function index() {
                 </span>
                 <span
                   data-food-id={menuItem.id}
-                  onClick={() => addToCart(menuItem)}
-                  className="text-green-600 font-semibold w-[100px] text-sm inline-flex flex-col items-center justify-center pl-6 hover:bg-green-500 hover:text-white cursor-pointer"
+                  onClick={() => addOrRemoveFromCart(menuItem)}
+                  className={`${
+                    isPresentInCart(menuItem.id)
+                      ? "text-red-500"
+                      : "text-green-600"
+                  } font-semibold w-[100px] text-xs inline-flex flex-col items-center justify-center pl-6 hover:text-white cursor-pointer ${
+                    isPresentInCart(menuItem.id)
+                      ? "hover:bg-red-500"
+                      : "hover:bg-green-500"
+                  }`}
                   style={{
                     clipPath: "polygon(0 0, 100% 0%, 100% 100%, 37% 100%)",
                   }}
                 >
                   <Cart />
-                  Add
+                  {isPresentInCart(menuItem.id) ? "Remove" : "Add"}
                 </span>
               </li>
             ))}

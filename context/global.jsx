@@ -94,6 +94,8 @@ function GlobalProvider({ children }) {
     return total;
   };
 
+  const isPresentInCart = (id) => cart.map((item) => item.id).includes(id);
+
   return (
     <context.Provider
       value={{
@@ -106,6 +108,7 @@ function GlobalProvider({ children }) {
         cartCount,
         loadCartFromStorage,
         resetCart,
+        isPresentInCart,
       }}
     >
       {children}
