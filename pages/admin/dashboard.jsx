@@ -70,7 +70,7 @@ function dashboard() {
         ) : (
           <>
             {allOrdersClosed ? (
-              <p>All orders are closed</p>
+              <p className="text-center">All orders are closed!</p>
             ) : (
               <table className="mx-auto w-full bg-white rounded-lg overflow-hidden drop-shadow-md">
                 <thead className="border-b bg-primary text-white">

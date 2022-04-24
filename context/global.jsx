@@ -1,9 +1,35 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import Axios from "axios";
+import useUserAuth from "../hooks/user/useUserAuth";
 
 const context = createContext(null);
 
 function GlobalProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState({ email: "", phone: "", name: "" });
+  const authorizeUser = useUserAuth();
+
+  // fetch user data
+  const fetchUserData = async () => {
+    console.log("Fetching user");
+    const { isAuthorized } = await authorizeUser();
+
+    if (isAuthorized) {
+      console.log("the user is authorized");
+      try {
+        console.log("Sending request");
+        const { data } = await Axios.get(
+          `${process.env.NEXT_PUBLIC_API_HOST}/user`,
+          { withCredentials: true }
+        );
+        const { name, email, phone } = data.user;
+        setUser({ name, email, phone });
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    }
+  };
+  useEffect(fetchUserData, []);
 
   useEffect(() => {
     const cart = localStorage.getItem("cart");
@@ -108,6 +134,7 @@ function GlobalProvider({ children }) {
         cartCount,
         loadCartFromStorage,
         resetCart,
+        user,
         isPresentInCart,
       }}
     >

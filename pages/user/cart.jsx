@@ -18,6 +18,7 @@ function cart() {
     handleQuantityDecrement,
     cartTotal,
     loadCartFromStorage,
+    user,
   } = useGlobalContext();
 
   const loadScript = (src) => {
@@ -71,11 +72,11 @@ function cart() {
       image: `/vec-logo-small.png`,
       order_id: orderData.orderId,
       handler: saveOrderDetails,
-      // prefill: {
-      //   name: "Anirudh Jwala",
-      //   email: "anirudh@gmail.com",
-      //   contact: "9999999999",
-      // },
+      prefill: {
+        name: user.name,
+        email: user.email,
+        contact: user.phone.substring(3),
+      },
       theme: {
         color: "#642611",
       },
