@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import LeftArrow from "../../components/icons/LeftArrow";
 import Wrapper from "../../components/common/Wrapper";
+import { useGlobalContext } from "../../context/global";
 
 const inputClasses =
   "border border-gray-300 rounded-lg p-2 w-full outline-primary text-sm";
@@ -14,6 +15,7 @@ const labelClasses = "mb-1 inline-block text-sm font-semibold";
 function login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const router = useRouter();
+  const { setUser } = useGlobalContext();
 
   const handleDataForm = (e) => {
     const field = e.target.name;
@@ -33,6 +35,7 @@ function login() {
         { withCredentials: true }
       );
 
+      setUser({ ...data.user });
       router.push("/user/profile");
     } catch (error) {
       alert(error.response.data.message);

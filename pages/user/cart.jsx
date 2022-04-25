@@ -98,6 +98,7 @@ function cart() {
       orderId = data.orderId;
       proceedPayment(data);
     } catch (error) {
+      if (error.response.status == 403) return router.push("/user/login");
       alert(error.response.data.message);
     }
   };

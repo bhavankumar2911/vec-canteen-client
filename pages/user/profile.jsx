@@ -17,7 +17,7 @@ function profile() {
   const [orders, setOrders] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
-  const { resetCart } = useGlobalContext();
+  const { resetCart, setUser } = useGlobalContext();
 
   const formattedOrders = useOrderFormatter(orders, orderDetails);
 
@@ -62,6 +62,7 @@ function profile() {
       });
 
       resetCart();
+      setUser({ email: "", name: "", phone: "" });
       router.push("/");
     } catch (error) {
       console.log(error);

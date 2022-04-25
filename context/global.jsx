@@ -135,6 +135,7 @@ function GlobalProvider({ children }) {
         loadCartFromStorage,
         resetCart,
         user,
+        setUser,
         isPresentInCart,
       }}
     >
