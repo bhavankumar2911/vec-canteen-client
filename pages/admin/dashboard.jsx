@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Loader from "../../components/common/Loader";
 
-function dashboard() {
+function Dashboard() {
   const [loadingOrderCount, setLoadingOrderCount] = useState(true);
   const [quantityOfEachItem, setQuantityOfEachItem] = useState({});
   const [allOrdersClosed, setAllOrdersClosed] = useState(false);
@@ -117,4 +117,4 @@ function dashboard() {
   );
 }
 
-export default dashboard;
+export default Dashboard;

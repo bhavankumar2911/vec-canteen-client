@@ -12,7 +12,7 @@ const inputClasses =
 const inputGroupClasses = "mb-3";
 const labelClasses = "mb-1 inline-block text-sm font-semibold";
 
-function login() {
+function Login() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const router = useRouter();
   const { setUser } = useGlobalContext();
@@ -125,4 +125,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

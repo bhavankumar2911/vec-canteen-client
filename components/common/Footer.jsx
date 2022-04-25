@@ -13,6 +13,7 @@ function Footer() {
         href="https://www.instagram.com/bhavan29_/"
         className="text-blue-500 hover:underline"
         target="_blank"
+        rel="noreferrer"
       >
         Bhavan,{" "}
       </a>
@@ -20,6 +21,7 @@ function Footer() {
         href="https://www.instagram.com/_k.u.r.a.l_/"
         className="text-blue-500 hover:underline"
         target="_blank"
+        rel="noreferrer"
       >
         Kural,{" "}
       </a>
@@ -28,6 +30,7 @@ function Footer() {
         href="https://www.instagram.com/sha_kt_hi_071/"
         className="text-blue-500 hover:underline"
         target="_blank"
+        rel="noreferrer"
       >
         Shakthi
       </a>

@@ -11,7 +11,7 @@ const inputClasses =
 const inputGroupClasses = "mb-3";
 const labelClasses = "mb-1 inline-block text-sm font-semibold";
 
-function signup() {
+function Signup() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -262,4 +262,4 @@ function signup() {
   );
 }
 
-export default signup;
+export default Signup;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import useOrderFormatter from "../../hooks/common/useOrderFormatter";
 
-function orders() {
+function Orders() {
   const [orders, setOrders] = useState([]);
   const [orderDetails, setOrderDetails] = useState([]);
 
@@ -37,4 +37,4 @@ function orders() {
   );
 }
 
-export default orders;
+export default Orders;

@@ -6,7 +6,7 @@ import Wrapper from "../components/common/Wrapper";
 import Cart from "../components/icons/Cart";
 import Footer from "../components/common/Footer";
 
-function index() {
+function Index() {
   const [menu, setMenu] = useState([]);
   const { addToCart, isPresentInCart, deleteFromCart } = useGlobalContext();
 
@@ -99,4 +99,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

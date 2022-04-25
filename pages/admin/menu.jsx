@@ -4,7 +4,7 @@ import MenuTable from "../../components/admin/MenuTable";
 import MenuAddForm from "../../components/admin/MenuAddForm";
 import MenuEditForm from "../../components/admin/MenuEditForm";
 
-function menu() {
+function Menu() {
   const [menu, setMenu] = useState([]);
   const [idOfFoodBeingEdited, setIdOfFoodBeingEdited] = useState(null);
   const [nameOfFoodBeingEdited, setNameOfFoodBeingEdited] = useState("");
@@ -88,4 +88,4 @@ function menu() {
   );
 }
 
-export default menu;
+export default Menu;

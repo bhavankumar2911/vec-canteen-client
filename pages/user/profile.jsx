@@ -11,7 +11,7 @@ import UserAuthorizationScreen from "../../components/common/UserAuthorizationSc
 import { useGlobalContext } from "../../context/global";
 import { QRCodeSVG } from "qrcode.react";
 
-function profile() {
+function Profile() {
   // useForbiddenRedirect();
   const router = useRouter();
   const [orders, setOrders] = useState([]);
@@ -147,4 +147,4 @@ function profile() {
   );
 }
 
-export default profile;
+export default Profile;

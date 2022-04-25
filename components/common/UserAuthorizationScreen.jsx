@@ -3,7 +3,7 @@ import useUserAuth from "../../hooks/user/useUserAuth";
 import { useRouter } from "next/router";
 import Loader from "./Loader";
 
-function userAuthorizationScreen() {
+function UserAuthorizationScreen() {
   const [showScreen, setShowScreen] = useState(true);
   const router = useRouter();
 
@@ -26,4 +26,4 @@ function userAuthorizationScreen() {
     );
 }
 
-export default userAuthorizationScreen;
+export default UserAuthorizationScreen;

@@ -3,7 +3,7 @@ import Axios from "axios";
 
 const inputClasses = "border border-primary";
 
-function signup() {
+function Update() {
   const [formData, setFormData] = useState({
     name: "",
     registerNumber: "",
@@ -146,4 +146,4 @@ function signup() {
   );
 }
 
-export default signup;
+export default Update;

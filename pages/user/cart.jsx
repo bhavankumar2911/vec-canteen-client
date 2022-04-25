@@ -7,7 +7,7 @@ import Wrapper from "../../components/common/Wrapper";
 import Button from "../../components/common/Button";
 import Link from "next/link";
 
-function cart() {
+function Cart() {
   const router = useRouter();
   const { resetCart, cartCount } = useGlobalContext();
   let orderId = "";
@@ -178,4 +178,4 @@ function cart() {
   );
 }
 
-export default cart;
+export default Cart;
