@@ -54,6 +54,7 @@ function QRCodeScanner() {
             onResult={handleSuccessfulScan}
             style={{ width: "100%" }}
             scanDelay={1000}
+            facingMode={"rear"}
           />
         ) : (
           <p className="bg-white rounded-lg px-3 pt-3 pb-5 mt-5">
