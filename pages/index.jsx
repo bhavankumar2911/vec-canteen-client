@@ -38,14 +38,14 @@ function Index() {
     <main className="pt-[12vh] bg-gray-50 min-h-screen">
       {/* hero section start */}
 
-      <section>
+      <section className="sm:h-[300px]">
         <img
           src="/hero-img.jpeg"
           alt="canteen image"
-          className=""
+          className="sm:w-full sm:h-full sm:object-cover"
           style={{ clipPath: "polygon(0 0, 100% 0%, 100% 100%, 0 82%)" }}
         />
-        <h3 className="text-primary font-black text-3xl px-[5%] py-5 leading-[50px]">
+        <h3 className="text-primary font-black text-3xl px-[5%] py-5 leading-[50px] sm:text-center sm:text-5xl sm:leading-[70px] md:my-10">
           <span className="text-primary bg-secondary p-1">Food</span> never
           fails in bringing{" "}
           <span className="text-primary bg-secondary p-1">people</span>{" "}
@@ -56,9 +56,9 @@ function Index() {
       {/* hero section end */}
       <Wrapper>
         <Header />
-        <section>
+        <section className="sm:mt-60">
           <h2 className="text-2xl font-semibold my-5 text-center">Menu</h2>
-          <ul>
+          <ul className="sm:grid sm:grid-cols-2 sm:gap-3">
             {menu.map((menuItem, index) => (
               <li
                 key={index}
